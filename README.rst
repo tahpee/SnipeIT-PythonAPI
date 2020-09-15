@@ -7,7 +7,7 @@ API directly from Python.
 Installation
 ------------
 
-Run the command ``pip install snipeit``
+Run the command ``pip install snipeit-pyapi``
 
 Usage
 -----

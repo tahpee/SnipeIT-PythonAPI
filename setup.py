@@ -3,7 +3,7 @@ from setuptools import setup
 with open("README.rst","r") as fh:
 	long_description = fh.read()
 	
-setup(name='snipeit',
+setup(name='snipeit-pyapi',
       version='1.3',
 	long_description=long_description,
       long_description_content_type="text/markdown",
