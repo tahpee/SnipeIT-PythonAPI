@@ -62,6 +62,23 @@ class Fieldsets(object):
         results = requests.post(self.server, headers=headers, data=payload)
         return json.dumps(results.json(),indent=4, separators=(',', ':'))
 
+    def getDetails(self, server, token):
+        """Get list of fieldsets
+        
+        Arguments:
+            server {string} -- Server URI
+            token {string} -- Token value to be used for accessing the API
+        
+        Returns:
+            string -- Detailed information of fieldsets by ID
+        """
+        self.uri = '/api/v1/fieldsets'
+        self.server = server + self.uri
+        headers = {'Authorization': 'Bearer {0}'.format(token)}
+        results = requests.get(self.server, headers=headers)                
+        return results.content
+
+
     def getDetailsByID(self, server, token, fieldsetsID):
         """Get detailed information of label by ID
         
@@ -78,7 +95,6 @@ class Fieldsets(object):
         headers = {'Content-Type': 'application/json','Authorization': 'Bearer {0}'.format(token)}
         results = requests.get(self.server, headers=headers)                
         return results.content
-
     
     def delete(self, server, token, fieldsetsID):
         """Delete fieldsets data
