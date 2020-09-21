@@ -4,7 +4,7 @@ with open("README.rst","r") as fh:
 	long_description = fh.read()
 	
 setup(name='snipeitpyapi',
-      version='1.5',
+      version='1.6',
 	long_description=long_description,
       long_description_content_type="text/markdown",
       description=("Python library to access the SnipeIT API"),
