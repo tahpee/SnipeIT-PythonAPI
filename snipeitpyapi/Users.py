@@ -94,6 +94,7 @@ class Users(object):
         self.server = server + self.uri
         headers = {'Content-Type': 'application/json','Authorization': 'Bearer {0}'.format(token)}
         results = requests.post(self.server, headers=headers, data=payload)
+        print(results.text)
         return json.dumps(results.json(),indent=4, separators=(',', ':'))
 
     def getID(self, server, token, user_name):

@@ -20,6 +20,7 @@ except:
     pass
 
 import json
+import logging
 
 
 class Assets(object):
@@ -418,7 +419,7 @@ class Assets(object):
         return json.dumps(results.json(),indent=4, separators=(',', ':'))
 
         
-    def checkOutAsset(self, server, token, assetID, note=None, locationID=None):
+    def checkOutAsset(self, server, token, assetID, note=None, locationID=None, userID=None):
         """Check out an asset
         
         Arguments:
@@ -430,12 +431,12 @@ class Assets(object):
             note {string} -- Note of the checkin (default: {None})
             locationID {string} -- Location id where the asset checked out (default: {None})
         """
-        self.uri = ('/api/v1/hardware/{0}/checkout'.format(assetID))
-        payload  = {'note':note, 'location_id':locationID}
+        self.uri = '/api/v1/hardware/{0}/checkout'.format(assetID)
+        payload  = {'checkout_to_type': 'user', 'assigned_user': userID}
         self.server = server + self.uri
-        headers = {'Content-Type': 'application/json','Authorization': 'Bearer {0}'.format(token)}
-        results = requests.post(self.server, headers=headers, data=payload)
-        return json.dumps(results.json(),indent=4, separators=(',', ':'))
+        headers = {'Accept': 'application/json', 'Content-Type': 'application/json','Authorization': 'Bearer {0}'.format(token)}
+        results = requests.post(self.server, headers=headers, data=json.dumps(payload))
+        return json.dumps(results.text,indent=4, separators=(',', ':'))
 
     def auditAsset(self, server, token, assetTag=None, locationID=None):
         """Audit an asset
